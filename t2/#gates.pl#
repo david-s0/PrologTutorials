@@ -36,11 +36,14 @@ output(G, 1) :-
 	input1(G, 0),
 	input2(G, 1),
 	xorgate(G).
-%not true if they are equal
+%not true if both are
 output(G, 0) :-
-	input1(G, I1),
-	input2(G, I2),
-	(I1 == I2),
+	input1(G, 1),
+	input2(G, 1),
+	xorgate(G).
+output(G, 0) :-
+	input1(G, 0),
+	input2(G, 0),
 	xorgate(G).
 
 %output for AND gates
@@ -51,9 +54,15 @@ output(G, 1) :-
 	andgate(G).
 %false otherwise
 output(G, 0) :-
-	input1(G, 0),
+	input1(G, 1),
+	input2(G, 0),
 	andgate(G).
 output(G, 0) :-
+	input1(G, 0),
+	input2(G, 1),
+	andgate(G).
+output(G, 0) :-
+	input1(G, 0),
 	input2(G, 0),
 	andgate(G).
 
@@ -66,9 +75,13 @@ output(G, 0) :-
 %true otherwise
 output(G, 1) :-
 	input1(G, 1),
-	input2(G, _),
+	input2(G, 0),
 	orgate(G).
 output(G, 1) :-
-	input1(G, _),
+	input1(G, 0),
+	input2(G, 1),
+	orgate(G).
+output(G, 1) :-
+	input1(G, 1),
 	input2(G, 1),
 	orgate(G).
